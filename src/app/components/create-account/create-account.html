@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <title>Create Account</title>
+    <link rel="stylesheet" href="./create-account.css">
+</head>
+
+<body>
+    <div>
+        <h1>Task Management App</h1>
+        <form>
+            <div class="name-fields">
+                <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+            </div>
+            <br>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <br>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <br>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+            <br>
+            <input type="file" accept="image/*" id="imageInput" (change)="onFileSelected($event)" hidden>
+            <div class="upload-container">
+                <img src="upload-icon.jpg" alt="Upload Image" class="upload-icon" />
+                <label for="imageInput" class="custom-file-label">{{imageFileName()}}</label>
+            </div>
+            <br>
+            <button type="submit">Create Account</button>
+            <br>
+            <a routerLink="/login">Already have an account? Login</a>
+        </form>
+    </div>
+</body>
+
+</html>
