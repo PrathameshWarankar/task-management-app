@@ -17,20 +17,21 @@
             </div>
             <br>
             <input #email type="email" id="email" name="Email" placeholder="Email" [(ngModel)]="user.Email"
-                (focus)="checkEmail()" required>
+                (focus)="checkEmail()" (input)="emailValidate()" required>
+            <span>{{emailError}}</span>
             <br>
             <input #password type="password" id="password" name="Password" placeholder="Password"
-                [(ngModel)]="user.Password" (focus)="checkPassword()" required>
+                [(ngModel)]="user.Password" (focus)="checkPassword()" (input)="passwordFormatValidate()" required>
             <br>
             <input #confirmPassword type="password" id="confirmPassword" name="Confirm Password"
                 placeholder="Confirm Password" [(ngModel)]="this.user.ConfirmPassword" (focus)="checkConfirmPassword()"
                 (input)="passwordValidate()" required>
             <span>{{passwordError}}</span>
             <br>
-            <input type="file" accept="image/*" id="imageInput" (change)="onFileSelected($event)"  hidden>
+            <input type="file" accept="image/*" id="imageInput" (change)="onFileSelected($event)" hidden>
             <div class="upload-container">
-                <img src="upload-icon.jpg" alt="Upload Image" class="upload-icon"/>
-                <label for="imageInput" class="custom-file-label" 
+                <img src="upload-icon.jpg" alt="Upload Image" class="upload-icon" />
+                <label for="imageInput" class="custom-file-label"
                     (click)="checkProfileImg()">{{imageFileName()}}</label>
             </div>
             <br>

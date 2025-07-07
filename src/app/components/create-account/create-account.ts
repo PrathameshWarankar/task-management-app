@@ -18,6 +18,7 @@ export class CreateAccount {
   imageFileName = signal('Upload profile picture');
   user: User = { 'Id': '', 'FirstName': '', 'LastName': '', 'Email': '', 'Password': '', 'ConfirmPassword': '', 'ProfileImgPath': '' };
   passwordError: string = '';
+  emailError: string = '';
   private router: Router = inject(Router);
 
   onFileSelected(event: any) {
@@ -25,8 +26,6 @@ export class CreateAccount {
     if (file) {
       this.imageFileName.set(file.name);
     }
-
-    console.log(this.imageFileName())
   }
 
   @ViewChild('firstName') firstName!: ElementRef;
@@ -34,10 +33,6 @@ export class CreateAccount {
   @ViewChild('email') email!: ElementRef;
   @ViewChild('password') password!: ElementRef;
   @ViewChild('confirmPassword') confirmPassword!: ElementRef;
-
-  isInvalid(value: string): boolean {
-    return value.trim() === '';
-  }
 
   checkLastName() {
     if (this.user.FirstName.trim() === '') {
@@ -90,29 +85,52 @@ export class CreateAccount {
   passwordValidate() {
     if (this.user.Password !== this.user.ConfirmPassword) {
       this.passwordError = "Passwords do not match"
+      return false;
     } else {
       this.passwordError = ''
+      return true;
+    }
+  }
+
+  passwordFormatValidate() {
+    const passwordPattern = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+    console.log(passwordPattern.test(this.user.Password) + ' ' + this.user.Password)
+    if (passwordPattern.test(this.user.Password)) {
+      this.passwordError = ''
+      return true;
+    }
+    else {
+      this.passwordError = "Password must be at least 8 characters long and include at least\none uppercase letter and one number"
+      return false;
+    }
+  }
+
+  emailValidate() {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (emailPattern.test(this.user.Email)) {
+      this.emailError = '';
+      return true;
+    } else {
+      this.emailError = 'Invalid email format';
+      return false
     }
   }
 
   onSubmit(form: NgForm) {
-    this.checkLastName();
-    this.checkEmail();
-    this.checkPassword();
-    this.checkConfirmPassword();
     this.checkProfileImg();
 
-    if (!form.invalid) {
+    if (!form.invalid && this.passwordValidate() && this.passwordFormatValidate() && this.emailValidate()) {
       this.user.Id = crypto.randomUUID();
       this.httpClient.post('https://localhost:7216/Home/CreateAccount', this.user, {
       }).subscribe({
         next: response => {
           console.log('Account created successfully');
-          this.snackBar.open('Account created successfully', 'Close', {   
+          this.snackBar.open('Account created successfully', 'Close', {
             duration: 3000,
             panelClass: ['success-snackbar']
           });
-          
+
           setTimeout(() => {
             this.router.navigate(['/login']);
           }, 500);

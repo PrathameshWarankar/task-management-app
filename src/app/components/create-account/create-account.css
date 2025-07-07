@@ -7,7 +7,7 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f1f6f9;
-    padding-top: 10vh;
+    padding-top: 15vh;
     margin: 0;
 }
 
@@ -114,4 +114,5 @@ span {
     color: red;
     font-family: 'Inter', sans-serif;
     font-size: 0.8em;
+    white-space: pre-line;
 }
