@@ -13,17 +13,17 @@
                 <input #firstName type="text" id="firstName" name="FirstName" placeholder="First Name"
                     [(ngModel)]="user.FirstName" required>
                 <input #lastName type="text" id="lastName" name="LastName" placeholder="Last Name"
-                    [(ngModel)]="user.LastName" (click)="checkLastName()" required>
+                    [(ngModel)]="user.LastName" (focus)="checkLastName()" required>
             </div>
             <br>
             <input #email type="email" id="email" name="Email" placeholder="Email" [(ngModel)]="user.Email"
-                (click)="checkEmail()" required>
+                (focus)="checkEmail()" required>
             <br>
             <input #password type="password" id="password" name="Password" placeholder="Password"
-                [(ngModel)]="user.Password" (click)="checkPassword()" required>
+                [(ngModel)]="user.Password" (focus)="checkPassword()" required>
             <br>
             <input #confirmPassword type="password" id="confirmPassword" name="Confirm Password"
-                placeholder="Confirm Password" [(ngModel)]="this.user.ConfirmPassword" (click)="checkConfirmPassword()"
+                placeholder="Confirm Password" [(ngModel)]="this.user.ConfirmPassword" (focus)="checkConfirmPassword()"
                 (input)="passwordValidate()" required>
             <span>{{passwordError}}</span>
             <br>

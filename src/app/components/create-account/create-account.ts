@@ -1,21 +1,24 @@
 import { Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { User } from '../../models/user.model';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-account',
   standalone: true,
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, MatSnackBarModule],
   templateUrl: './create-account.html',
   styleUrl: './create-account.css'
 })
 export class CreateAccount {
   private httpClient = inject(HttpClient);
+  private snackBar = inject(MatSnackBar);
   imageFileName = signal('Upload profile picture');
   user: User = { 'Id': '', 'FirstName': '', 'LastName': '', 'Email': '', 'Password': '', 'ConfirmPassword': '', 'ProfileImgPath': '' };
   passwordError: string = '';
+  private router: Router = inject(Router);
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
@@ -74,22 +77,22 @@ export class CreateAccount {
     }
   }
 
-  checkProfileImg(){
+  checkProfileImg() {
     this.checkConfirmPassword()
 
-        if (this.user.Password.trim() === '') {
+    if (this.user.Password.trim() === '') {
       this.confirmPassword.nativeElement.style.border = "1px solid red"
     } else {
       this.confirmPassword.nativeElement.style.border = "1px solid #212a3e"
     }
   }
 
-  passwordValidate(){
-      if(this.user.Password !== this.user.ConfirmPassword){
-          this.passwordError = "Passwords do not match"
-      } else {
-        this.passwordError = ''
-      }
+  passwordValidate() {
+    if (this.user.Password !== this.user.ConfirmPassword) {
+      this.passwordError = "Passwords do not match"
+    } else {
+      this.passwordError = ''
+    }
   }
 
   onSubmit(form: NgForm) {
@@ -105,6 +108,14 @@ export class CreateAccount {
       }).subscribe({
         next: response => {
           console.log('Account created successfully');
+          this.snackBar.open('Account created successfully', 'Close', {   
+            duration: 3000,
+            panelClass: ['success-snackbar']
+          });
+          
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 500);
         },
         error: err => {
           if (err.error.message != undefined) {
