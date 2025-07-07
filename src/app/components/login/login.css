@@ -7,7 +7,7 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f1f6f9;
-    padding-top: 20vh;
+    padding-top: 22vh;
     margin: 0;
 }
 
@@ -22,7 +22,7 @@ h1 {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     color: #212a3e;
-    font-size: 2.5em;
+    font-size: 2em;
     margin-top: 2%;
 }
 
@@ -39,7 +39,7 @@ input {
     border: none;
     border-radius: 10px;
     border: 1px solid #212a3e;
-    font-size: 1.15em;
+    font-size: 1em;
     font-family: 'Inter', sans-serif;
     width: 75%;
 }
@@ -54,7 +54,7 @@ button {
     padding: 2% 10%;
     border: none;
     border-radius: 15px;
-    font-size: 1.25em;
+    font-size: 1.15em;
     cursor: pointer;
 }
 
@@ -63,7 +63,7 @@ a {
     color: #212a3e;
     text-decoration: none;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 0.9em;
     font-weight: 500;
     padding-top: 3%;
 }

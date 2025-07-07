@@ -15,7 +15,7 @@ h1 {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     color: #212a3e;
-    font-size: 3.5em;
+    font-size: 3em;
 }
 
 button {
@@ -24,6 +24,6 @@ button {
     padding: 0.75% 3.75%;
     border: none;
     border-radius: 15px;
-    font-size: 1.25em;
+    font-size: 1.15em;
     cursor: pointer;
 }

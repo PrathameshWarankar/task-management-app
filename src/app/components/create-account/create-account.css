@@ -22,7 +22,7 @@ h1 {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     color: #212a3e;
-    font-size: 2.5em;
+    font-size: 2em;
     margin-top: 2%;
     text-align: center;
 }
@@ -41,7 +41,7 @@ label {
     border: none;
     border-radius: 10px;
     border: 1px solid #212a3e;
-    font-size: 1.15em;
+    font-size: 1em;
     font-family: 'Inter', sans-serif;
     width: 90%;
 }
@@ -56,7 +56,7 @@ button {
     padding: 2% 10%;
     border: none;
     border-radius: 15px;
-    font-size: 1.25em;
+    font-size: 1.05em;
     cursor: pointer;
 }
 
@@ -65,7 +65,7 @@ a {
     color: #212a3e;
     text-decoration: none;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 0.9em;
     font-weight: 500;
 }
 
@@ -103,8 +103,8 @@ a:hover {
 }
 
 .upload-icon {
-    width: 35px;
-    height: 35px;
+    width: 32px;
+    height: 32px;
     margin-right: 10px;
     border-radius: 10px;
     padding: 5px;
