@@ -8,22 +8,30 @@
 <body>
     <div>
         <h1>Task Management App</h1>
-        <form>
+        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
             <div class="name-fields">
-                <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
-                <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+                <input #firstName type="text" id="firstName" name="FirstName" placeholder="First Name"
+                    [(ngModel)]="user.FirstName" required>
+                <input #lastName type="text" id="lastName" name="LastName" placeholder="Last Name"
+                    [(ngModel)]="user.LastName" (click)="checkLastName()" required>
             </div>
             <br>
-            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input #email type="email" id="email" name="Email" placeholder="Email" [(ngModel)]="user.Email"
+                (click)="checkEmail()" required>
             <br>
-            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input #password type="password" id="password" name="Password" placeholder="Password"
+                [(ngModel)]="user.Password" (click)="checkPassword()" required>
             <br>
-            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+            <input #confirmPassword type="password" id="confirmPassword" name="Confirm Password"
+                placeholder="Confirm Password" [(ngModel)]="this.user.ConfirmPassword" (click)="checkConfirmPassword()"
+                (input)="passwordValidate()" required>
+            <span>{{passwordError}}</span>
             <br>
-            <input type="file" accept="image/*" id="imageInput" (change)="onFileSelected($event)" hidden>
+            <input type="file" accept="image/*" id="imageInput" (change)="onFileSelected($event)"  hidden>
             <div class="upload-container">
-                <img src="upload-icon.jpg" alt="Upload Image" class="upload-icon" />
-                <label for="imageInput" class="custom-file-label">{{imageFileName()}}</label>
+                <img src="upload-icon.jpg" alt="Upload Image" class="upload-icon"/>
+                <label for="imageInput" class="custom-file-label" 
+                    (click)="checkProfileImg()">{{imageFileName()}}</label>
             </div>
             <br>
             <button type="submit">Create Account</button>
