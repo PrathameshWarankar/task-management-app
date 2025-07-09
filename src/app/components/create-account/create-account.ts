@@ -15,11 +15,12 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 export class CreateAccount {
   private httpClient = inject(HttpClient);
   private snackBar = inject(MatSnackBar);
+  private router: Router = inject(Router);
+
   imageFileName = signal('Upload profile picture');
   user: User = { 'Id': '', 'FirstName': '', 'LastName': '', 'Email': '', 'Password': '', 'ConfirmPassword': '', 'ProfileImgPath': '' };
   passwordError: string = '';
   emailError: string = '';
-  private router: Router = inject(Router);
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
@@ -120,7 +121,7 @@ export class CreateAccount {
   onSubmit(form: NgForm) {
     this.checkProfileImg();
 
-    if (!form.invalid && this.passwordValidate() && this.passwordFormatValidate() && this.emailValidate()) {
+    if (!form.invalid && this.emailValidate() && this.passwordFormatValidate() && this.passwordValidate()) {
       this.user.Id = crypto.randomUUID();
       this.httpClient.post('https://localhost:7216/Home/CreateAccount', this.user, {
       }).subscribe({
